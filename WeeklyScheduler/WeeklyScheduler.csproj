@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="src\Data_Access\EmployeeTableDB.cs" />
+    <Compile Include="src\Data_Access\SchedulerDBContext.cs" />
+    <Compile Include="src\Models\Employee.cs" />
+    <Compile Include="src\View Models\WeeklyScheduleVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

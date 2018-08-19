@@ -38,9 +38,9 @@ namespace WeeklyScheduler.src.Data_Access
                     employees.Add(e);
                 }
             }
-            catch (SQLiteException e)
+            catch (SQLiteException ex)
             {
-                throw e;
+                throw ex;
             }
             finally
             {
@@ -49,18 +49,56 @@ namespace WeeklyScheduler.src.Data_Access
             return employees;
         }
 
+        public static Employee GetEmployee(int id)
+        {
+            SQLiteConnection conn = SchedulerDBContext.GetConnection();
+
+            string selectStatement = "SELECT * FROM Employee WHERE EmployeeId = @EmployeeId";
+
+            SQLiteCommand selectCommand = new SQLiteCommand(selectStatement, conn);
+            selectCommand.Parameters.AddWithValue("@EmployeeId", id);
+
+            try
+            {
+                conn.Open();
+                SQLiteDataReader reader = selectCommand.ExecuteReader();
+                Employee e = new Employee();
+
+                while (reader.Read())
+                {
+                    e.EmployeeId = Convert.ToInt32(reader["EmployeeId"].ToString());
+                    e.Name = reader["Name"].ToString();
+                }
+
+                return e;
+
+            }
+            catch (SQLiteException e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
 
         /// <summary>
         /// Adds an employee to the database
         /// </summary>
         /// <param name="e"></param>
-        public static void AddEmployee(Employee e)
+        public static int AddEmployee(Employee e)
         {
             SQLiteConnection conn = SchedulerDBContext.GetConnection();
 
             string insert = "INSERT INTO Employee" +
                 "(Name)" +
                 "VALUES(@Name)";
+
+            string lastInsert = "SELECT last_insert_rowid()";
+            SQLiteCommand selectCommand = new SQLiteCommand(lastInsert, conn);
+
 
             SQLiteCommand insertCommand = new SQLiteCommand(insert, conn);
             insertCommand.Parameters.AddWithValue("@Name", e.Name);
@@ -69,6 +107,7 @@ namespace WeeklyScheduler.src.Data_Access
             {
                 conn.Open();
                 insertCommand.ExecuteNonQuery();
+                return Convert.ToInt32(selectCommand.ExecuteScalar());
             }
             catch (SQLiteException ex)
             {
@@ -78,7 +117,9 @@ namespace WeeklyScheduler.src.Data_Access
             {
                 conn.Close();
             }
-        }
 
+            
+
+        }
     }
 }
