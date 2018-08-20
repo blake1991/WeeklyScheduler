@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 using WeeklyScheduler.src.Data_Access;
 using WeeklyScheduler.src.Models;
 using WeeklyScheduler.src;
-using WeeklyScheduler.src.View_Models;
+
 
 namespace WeeklyScheduler
 {
@@ -109,10 +109,14 @@ namespace WeeklyScheduler
 
             //simulates dialog to add new employee
             Employee emp = new Employee();
-            emp.Name = ":D";
+            emp.Name = ":facepalm:";
 
-            int id = EmployeeTableDB.AddEmployee(emp);
-            vm.EmpList.Add(EmployeeTableDB.GetEmployee(id));
+            EmployeeTableDB.AddEmployee(emp);
+            vm.Refresh();
+            //int id = EmployeeTableDB.AddEmployee(emp);
+            //vm.EmpList.Add(EmployeeTableDB.GetEmployee(id));
+            vm.SampleText = "A button changed this.";
+   
         }
     }
 }

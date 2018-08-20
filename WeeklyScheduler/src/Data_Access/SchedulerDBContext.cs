@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
 
-namespace WeeklyScheduler.src.Data_Access
+namespace WeeklyScheduler
 {
     class SchedulerDBContext
     {
@@ -34,13 +34,28 @@ namespace WeeklyScheduler.src.Data_Access
 
                 string EmployeeTable = "CREATE TABLE IF NOT EXISTS Employee (EmployeeId INTEGER PRIMARY KEY, " +
                     "Name varchar(50))";
+                string ScheduleTable = "CREATE TABLE IF NOT EXISTS Schedule (ScheduleId INTEGER PRIMARY KEY," +
+                    "month INTEGER," +
+                    "day INTEGER," +
+                    "year INTEGER," +
+                    "starttime varchar(10)," +
+                    "endtime varchar(10))";
+
+                string linkingTable = "CREATE TABLE IF NOT EXISTS EmployeeSchedule (EmployeeId INTEGER," +
+                    "ScheduleId INTEGER)";
+
 
                 try
                 {
                     connection.Open();
-                    SQLiteCommand createCommand = new SQLiteCommand(EmployeeTable, connection);
 
-                    createCommand.ExecuteNonQuery();
+                    SQLiteCommand createEmployeeCommand = new SQLiteCommand(EmployeeTable, connection);
+                    SQLiteCommand createScheduleCommand = new SQLiteCommand(ScheduleTable, connection);
+                    SQLiteCommand createLinkingCommand = new SQLiteCommand(linkingTable, connection);
+
+                    createEmployeeCommand.ExecuteNonQuery();
+                    createScheduleCommand.ExecuteNonQuery();
+                    createLinkingCommand.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {

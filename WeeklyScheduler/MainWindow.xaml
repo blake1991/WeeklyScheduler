@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" Loaded="OnWindowLoad">
 
+    <Window.Resources>
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
 
     <!-- Weekly Schedule -->
     <DockPanel>
@@ -24,16 +29,16 @@
             <Button x:Name="LastWeekBtn" Content="&#8592;"></Button>
             <Button x:Name="TodayBtn" Content="Today"></Button>
             <Button x:Name="NextWeekBtn" Content="&#8594;"></Button>
-            <TextBlock x:Name="CurrentWeekTB" Margin="50 0 200 0">Week:</TextBlock>
+            <TextBlock Text="{Binding SampleText, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" x:Name="CurrentWeekTB" Margin="50 0 200 0"></TextBlock>
             <Button x:Name="PrintBtn"  Content="Print" Click="PrintSchedule"></Button>
         </StackPanel>
         
         
 
-        <DataGrid x:Name="ScheduleDG" ItemsSource="{Binding EmpList}"  DockPanel.Dock="Bottom" AutoGenerateColumns="false" CanUserAddRows="False" CanUserReorderColumns="False" Margin="10 10">
+        <DataGrid x:Name="ScheduleDG" ItemsSource="{Binding testEmp}"  DockPanel.Dock="Bottom" AutoGenerateColumns="false" CanUserAddRows="False" CanUserReorderColumns="False" Margin="10 10">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Staff"></DataGridTextColumn>
-                <DataGridTextColumn Header="Sun" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding employee.Name}" Header="Staff"></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding days[0].WorkHours}"  Header="Sun" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Mon" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Tue" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Wed" Width="*"></DataGridTextColumn>

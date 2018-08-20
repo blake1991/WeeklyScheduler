@@ -87,8 +87,7 @@
             </Setter>
         </Style>
 
-        <Style TargetType="TextBlock">
-        </Style>
+  
         
         
     </Application.Resources>
