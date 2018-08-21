@@ -29,22 +29,26 @@
             <Button x:Name="LastWeekBtn" Content="&#8592;"></Button>
             <Button x:Name="TodayBtn" Content="Today"></Button>
             <Button x:Name="NextWeekBtn" Content="&#8594;"></Button>
-            <TextBlock Text="{Binding SampleText, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" x:Name="CurrentWeekTB" Margin="50 0 200 0"></TextBlock>
+            <TextBlock Text="{Binding WeekDates[0], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" x:Name="CurrentWeekTB" Margin="50 0 200 0"></TextBlock>
             <Button x:Name="PrintBtn"  Content="Print" Click="PrintSchedule"></Button>
         </StackPanel>
-        
-        
 
+
+
+        
         <DataGrid x:Name="ScheduleDG" ItemsSource="{Binding testEmp}"  DockPanel.Dock="Bottom" AutoGenerateColumns="false" CanUserAddRows="False" CanUserReorderColumns="False" Margin="10 10">
+            <DataGrid.Resources>
+                <local:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding employee.Name}" Header="Staff"></DataGridTextColumn>
-                <DataGridTextColumn  Binding="{Binding days[0].WorkHours}"  Header="Sun" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Mon" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Tue" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Wed" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Thurs" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Fri" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Sat" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding employee.Name}" Header="{Binding SampleText}"></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding days[0].WorkHours}"  Header="{Binding Data.WeekDates[0], Source={StaticResource proxy}}" Width="*"/>
+                <DataGridTextColumn Header="{Binding Data.WeekDates[1], Source={StaticResource proxy}}" Width="*"/>
+                <DataGridTextColumn Header="{Binding Data.WeekDates[2], Source={StaticResource proxy}}" Width="*"/>
+                <DataGridTextColumn Header="{Binding Data.WeekDates[3], Source={StaticResource proxy}}" Width="*"/>
+                <DataGridTextColumn Header="{Binding Data.WeekDates[4], Source={StaticResource proxy}}" Width="*"/>
+                <DataGridTextColumn Header="{Binding Data.WeekDates[5], Source={StaticResource proxy}}" Width="*"/>
+                <DataGridTextColumn Header="{Binding Data.WeekDates[6], Source={StaticResource proxy}}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

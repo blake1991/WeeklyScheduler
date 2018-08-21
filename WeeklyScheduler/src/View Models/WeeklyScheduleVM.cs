@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using WeeklyScheduler.src.Data_Access;
 using WeeklyScheduler.src.Models;
@@ -7,22 +8,31 @@ namespace WeeklyScheduler
 {
     public class WeeklyScheduleVM : BaseViewModel
     {
-        public ObservableCollection<Employee> EmpList{ get; set; }
+        public ObservableCollection<Employee> EmpList { get; set; }
 
-        public string SampleText{ get; set; }
+        public string SampleText { get; set; }
 
-        public ObservableCollection<EmployeeSchedule> testEmp { get; set; } 
+        public ObservableCollection<EmployeeSchedule> testEmp { get; set; }
+
+        /// <summary>
+        /// Collection of weekly dates starting at sunday ending at saturday
+        /// </summary>
+        public ObservableCollection<string> WeekDates { get; set; }
+
+
+
 
         public WeeklyScheduleVM()
         {
             EmpList = EmployeeTableDB.GetAllEmployees();
             testEmp = new ObservableCollection<EmployeeSchedule>();
+            WeekDates = new ObservableCollection<string>();
 
 
             EmployeeSchedule temp;
 
-
-            for(int i = 0; i<5; i++)
+            //dummy data
+            for (int i = 0; i < 5; i++)
             {
                 temp = new EmployeeSchedule();
                 Employee e = new Employee();
@@ -39,17 +49,40 @@ namespace WeeklyScheduler
 
 
                 testEmp.Add(temp);
+
+
             }
 
 
-
+            SetDaysOfWeek();
             var testGet = ScheduleTableDB.GetScheduleById(1);
-            
+
         }
 
         public void Refresh()
         {
             EmpList = EmployeeTableDB.GetAllEmployees();
+        }
+
+        public void SetDaysOfWeek()
+        {
+            DateTime today = DateTime.Now;
+
+            //go back to sunday
+            TimeSpan fullday = new TimeSpan((int)today.DayOfWeek, 0, 0, 0);
+            today = today.Subtract(fullday);
+
+            for (int i = 0; i < 7; i++)
+            {
+                today = today.AddDays(1);
+                string DayDate = today.ToString("M/d");
+                WeekDates.Add(DayDate);
+            }
+        }
+
+        public void MoveFowardOneWeek()
+        {
+            
         }
 
 
