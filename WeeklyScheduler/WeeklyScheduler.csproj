@@ -77,6 +77,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BindingProxy.cs" />
+    <Compile Include="myDatetime.cs" />
     <Compile Include="src\Data_Access\EmployeeTableDB.cs" />
     <Compile Include="src\Data_Access\SchedulerDBContext.cs" />
     <Compile Include="src\Data_Access\ScheduleTableDB.cs" />

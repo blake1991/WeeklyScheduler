@@ -118,5 +118,20 @@ namespace WeeklyScheduler
             vm.SampleText = "A button changed this.";
    
         }
+
+        private void MoveForwardOneWeek_click(object sender, RoutedEventArgs e)
+        {
+            vm.MoveFowardOneWeek();
+        }
+
+        private void MoveBackOneWeek_click(object sender, RoutedEventArgs e)
+        {
+            vm.MoveBackOneWeek();
+        }
+
+        private void MoveToCurrentWeek_click(object sender, RoutedEventArgs e)
+        {
+            vm.MoveToCurrentWeek();
+        }
     }
 }

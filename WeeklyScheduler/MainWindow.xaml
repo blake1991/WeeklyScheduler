@@ -26,10 +26,10 @@
 
         <!-- Button Controls for Weekly Layout -->
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="10 10">
-            <Button x:Name="LastWeekBtn" Content="&#8592;"></Button>
-            <Button x:Name="TodayBtn" Content="Today"></Button>
-            <Button x:Name="NextWeekBtn" Content="&#8594;"></Button>
-            <TextBlock Text="{Binding WeekDates[0], UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" x:Name="CurrentWeekTB" Margin="50 0 200 0"></TextBlock>
+            <Button x:Name="LastWeekBtn" Content="&#8592;" Click="MoveBackOneWeek_click"></Button>
+            <Button x:Name="TodayBtn" Content="Today" Click="MoveToCurrentWeek_click"></Button>
+            <Button x:Name="NextWeekBtn" Content="&#8594;" Click="MoveForwardOneWeek_click"></Button>
+            <TextBlock Text="{Binding Path=Sunday, StringFormat=ddd M/d}" x:Name="CurrentWeekTB" Margin="50 0 200 0"></TextBlock>
             <Button x:Name="PrintBtn"  Content="Print" Click="PrintSchedule"></Button>
         </StackPanel>
 
@@ -37,18 +37,92 @@
 
         
         <DataGrid x:Name="ScheduleDG" ItemsSource="{Binding testEmp}"  DockPanel.Dock="Bottom" AutoGenerateColumns="false" CanUserAddRows="False" CanUserReorderColumns="False" Margin="10 10">
-            <DataGrid.Resources>
+            <!-- Custom class for getting around datagrid datacontext inheritance. -->
+            <!--<DataGrid.Resources>
                 <local:BindingProxy x:Key="proxy" Data="{Binding}" />
-            </DataGrid.Resources>
+            </DataGrid.Resources>-->
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding employee.Name}" Header="{Binding SampleText}"></DataGridTextColumn>
-                <DataGridTextColumn  Binding="{Binding days[0].WorkHours}"  Header="{Binding Data.WeekDates[0], Source={StaticResource proxy}}" Width="*"/>
-                <DataGridTextColumn Header="{Binding Data.WeekDates[1], Source={StaticResource proxy}}" Width="*"/>
-                <DataGridTextColumn Header="{Binding Data.WeekDates[2], Source={StaticResource proxy}}" Width="*"/>
-                <DataGridTextColumn Header="{Binding Data.WeekDates[3], Source={StaticResource proxy}}" Width="*"/>
-                <DataGridTextColumn Header="{Binding Data.WeekDates[4], Source={StaticResource proxy}}" Width="*"/>
-                <DataGridTextColumn Header="{Binding Data.WeekDates[5], Source={StaticResource proxy}}" Width="*"/>
-                <DataGridTextColumn Header="{Binding Data.WeekDates[6], Source={StaticResource proxy}}" Width="*"/>
+                <!--<DataGridTextColumn Header="{Binding Data.WeekDates[1], Source={StaticResource proxy}}" Width="*"/>-->
+
+                <!--How to bind using relative source to mainwindow-->
+                
+                <!-- Sunday Header -->
+                <DataGridTextColumn Width="*" Binding="{Binding days[0].WorkHours}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataContext.WeekDates[0],
+                                RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+                <!--Monday Header-->
+                <DataGridTextColumn Width="*">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataContext.WeekDates[1],
+                                RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+
+                <!--Tuesday Header-->
+                <DataGridTextColumn Width="*">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataContext.WeekDates[2],
+                                RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+
+                <!--Wednesday Header-->
+                <DataGridTextColumn Width="*">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataContext.WeekDates[3],
+                                RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+
+                <!--Thursday Header-->
+                <DataGridTextColumn Width="*">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataContext.WeekDates[4],
+                                RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+
+                <!--Friday Header-->
+                <DataGridTextColumn Width="*">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataContext.WeekDates[5],
+                                RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
+
+                <!--Saturday Header-->
+                <DataGridTextColumn Width="*">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataContext.WeekDates[6],
+                                RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+               
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

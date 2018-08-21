@@ -17,7 +17,9 @@ namespace WeeklyScheduler
         /// <summary>
         /// Collection of weekly dates starting at sunday ending at saturday
         /// </summary>
-        public ObservableCollection<string> WeekDates { get; set; }
+        public ObservableCollection<myDatetime> WeekDates { get; set; }
+
+        public DateTime Sunday { get; set; }
 
 
 
@@ -26,7 +28,7 @@ namespace WeeklyScheduler
         {
             EmpList = EmployeeTableDB.GetAllEmployees();
             testEmp = new ObservableCollection<EmployeeSchedule>();
-            WeekDates = new ObservableCollection<string>();
+            WeekDates = new ObservableCollection<myDatetime>();
 
 
             EmployeeSchedule temp;
@@ -49,13 +51,13 @@ namespace WeeklyScheduler
 
 
                 testEmp.Add(temp);
-
-
             }
 
 
             SetDaysOfWeek();
             var testGet = ScheduleTableDB.GetScheduleById(1);
+            WeekDates[0].day.AddDays(7);
+            Sunday = DateTime.Now;
 
         }
 
@@ -64,27 +66,52 @@ namespace WeeklyScheduler
             EmpList = EmployeeTableDB.GetAllEmployees();
         }
 
-        public void SetDaysOfWeek()
+        private void SetDaysOfWeek()
         {
             DateTime today = DateTime.Now;
 
             //go back to sunday
             TimeSpan fullday = new TimeSpan((int)today.DayOfWeek, 0, 0, 0);
             today = today.Subtract(fullday);
+            WeekDates.Add(new myDatetime(today));
 
-            for (int i = 0; i < 7; i++)
+            //start at sunday and create monday through saturday
+            for (int i = 0; i < 6; i++)
             {
                 today = today.AddDays(1);
-                string DayDate = today.ToString("M/d");
-                WeekDates.Add(DayDate);
+                WeekDates.Add(new myDatetime(today));
             }
+        }
+
+        public void MoveToCurrentWeek()
+        {
+            //create new list to proc notifychanged property
+            WeekDates = new ObservableCollection<myDatetime>();
+            //rebuild current week list
+            SetDaysOfWeek();
         }
 
         public void MoveFowardOneWeek()
         {
-            
+            ObservableCollection<myDatetime> newWeekDates = new ObservableCollection<myDatetime>();
+            foreach (var date in WeekDates)
+            {
+                date.AddWeek();
+                newWeekDates.Add(date);
+            }
+            WeekDates = newWeekDates;
         }
 
+        public void MoveBackOneWeek()
+        {
+            ObservableCollection<myDatetime> newWeekDates = new ObservableCollection<myDatetime>();
+            foreach (var date in WeekDates)
+            {
+                date.SubtractWeek();
+                newWeekDates.Add(date);
+            }
+            WeekDates = newWeekDates;
+        }
 
     }
 }
