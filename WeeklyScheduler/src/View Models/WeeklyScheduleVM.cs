@@ -19,11 +19,6 @@ namespace WeeklyScheduler
         /// </summary>
         public ObservableCollection<myDatetime> WeekDates { get; set; }
 
-        public DateTime Sunday { get; set; }
-
-
-
-
         public WeeklyScheduleVM()
         {
             EmpList = EmployeeTableDB.GetAllEmployees();
@@ -31,33 +26,10 @@ namespace WeeklyScheduler
             WeekDates = new ObservableCollection<myDatetime>();
 
 
-            EmployeeSchedule temp;
-
-            //dummy data
-            for (int i = 0; i < 5; i++)
-            {
-                temp = new EmployeeSchedule();
-                Employee e = new Employee();
-                e.EmployeeId = i;
-                e.Name = "Employee" + i;
-
-                temp.employee = e;
-
-                Schedule sch = new Schedule() { ScheduleId = 1, Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" };
-                ObservableCollection<Schedule> days = new ObservableCollection<Schedule>();
-
-                days.Add(sch);
-                temp.days = days;
-
-
-                testEmp.Add(temp);
-            }
-
-
+            Schedule sch = new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" };
+            int id = ScheduleTableDB.AddSchedule(sch);
+            Schedule testGet = ScheduleTableDB.GetScheduleById(id);
             SetDaysOfWeek();
-            var testGet = ScheduleTableDB.GetScheduleById(1);
-            WeekDates[0].day.AddDays(7);
-            Sunday = DateTime.Now;
 
         }
 
