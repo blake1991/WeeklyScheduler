@@ -35,7 +35,7 @@
 
 
 
-        
+        <!-- using testEmp right now to populate with dummy data -->
         <DataGrid x:Name="ScheduleDG" ItemsSource="{Binding testEmp}"  DockPanel.Dock="Bottom" AutoGenerateColumns="false" CanUserAddRows="False" CanUserReorderColumns="False" Margin="10 10">
             <!-- Custom class for getting around datagrid datacontext inheritance. -->
             <!--<DataGrid.Resources>
@@ -43,13 +43,12 @@
             </DataGrid.Resources>-->
             
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding employee.Name}" Header="{Binding SampleText}"></DataGridTextColumn>
-                <!--<DataGridTextColumn Header="{Binding Data.WeekDates[1], Source={StaticResource proxy}}" Width="*"/>-->
+                <DataGridTextColumn Binding="{Binding employee.Name}" Width="*" Header="Staff"></DataGridTextColumn>
 
                 <!--How to bind using relative source to mainwindow-->
                 
                 <!-- Sunday Header -->
-                <DataGridTextColumn Width="*" Binding="{Binding days[0].WorkHours}">
+                <DataGridTextColumn Binding="{Binding days[0]}" Width="*">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DataContext.WeekDates[0],
@@ -59,7 +58,7 @@
                 </DataGridTextColumn>
 
                 <!--Monday Header-->
-                <DataGridTextColumn Width="*">
+                <DataGridTextColumn Width="*" Binding="{Binding days[1]}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DataContext.WeekDates[1],
@@ -70,7 +69,7 @@
 
 
                 <!--Tuesday Header-->
-                <DataGridTextColumn Width="*">
+                <DataGridTextColumn Width="*" Binding="{Binding days[2]}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DataContext.WeekDates[2],
@@ -81,7 +80,7 @@
 
 
                 <!--Wednesday Header-->
-                <DataGridTextColumn Width="*">
+                <DataGridTextColumn Width="*" Binding="{Binding days[3]}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DataContext.WeekDates[3],
@@ -92,7 +91,7 @@
 
 
                 <!--Thursday Header-->
-                <DataGridTextColumn Width="*">
+                <DataGridTextColumn Width="*" Binding="{Binding days[4]}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DataContext.WeekDates[4],
@@ -103,7 +102,7 @@
 
 
                 <!--Friday Header-->
-                <DataGridTextColumn Width="*">
+                <DataGridTextColumn Width="*" Binding="{Binding days[5]}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DataContext.WeekDates[5],
@@ -114,7 +113,7 @@
 
 
                 <!--Saturday Header-->
-                <DataGridTextColumn Width="*">
+                <DataGridTextColumn Width="*" Binding="{Binding days[6]}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DataContext.WeekDates[6],

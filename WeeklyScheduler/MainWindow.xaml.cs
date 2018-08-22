@@ -109,14 +109,10 @@ namespace WeeklyScheduler
 
             //simulates dialog to add new employee
             Employee emp = new Employee();
-            emp.Name = ":facepalm:";
+            emp.Name = "different";
 
             EmployeeTableDB.AddEmployee(emp);
-            vm.Refresh();
-            //int id = EmployeeTableDB.AddEmployee(emp);
-            //vm.EmpList.Add(EmployeeTableDB.GetEmployee(id));
-            vm.SampleText = "A button changed this.";
-   
+            vm.Refresh();   
         }
 
         private void MoveForwardOneWeek_click(object sender, RoutedEventArgs e)

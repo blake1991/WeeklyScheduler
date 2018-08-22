@@ -8,7 +8,11 @@
         public int Year { get; set; } = 0;
         public string StartTime { get; set; } = string.Empty;
         public string EndTime { get; set; } = string.Empty;
-        public string WorkHours { get { return StartTime + " to " + EndTime; } }
 
+
+        public override string ToString()
+        {
+            return StartTime + " to " + EndTime;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using WeeklyScheduler.src.Data_Access;
@@ -19,6 +20,8 @@ namespace WeeklyScheduler
         /// </summary>
         public ObservableCollection<myDatetime> WeekDates { get; set; }
 
+        public Schedule testGet { get; set; }
+
         public WeeklyScheduleVM()
         {
             EmpList = EmployeeTableDB.GetAllEmployees();
@@ -26,9 +29,49 @@ namespace WeeklyScheduler
             WeekDates = new ObservableCollection<myDatetime>();
 
 
-            Schedule sch = new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" };
-            int id = ScheduleTableDB.AddSchedule(sch);
-            Schedule testGet = ScheduleTableDB.GetScheduleById(id);
+            #region dummy data
+
+            //make new weekly schedule
+            EmployeeSchedule WeeklySchedule = new EmployeeSchedule();
+            WeeklySchedule.employee = EmpList.First();
+
+            //get schedule from db
+
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "8", EndTime = "3" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "11", EndTime = "7" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+
+            testEmp.Add(WeeklySchedule);
+
+            //second employee
+            WeeklySchedule = new EmployeeSchedule();
+            WeeklySchedule.employee = EmpList.ElementAt(1);
+
+            //get schedule from db
+
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "7", EndTime = "3" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "7", EndTime = "3" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "6", EndTime = "4" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "5", EndTime = "9" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
+            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+
+            testEmp.Add(WeeklySchedule);
+
+
+            //dummy test data
+            foreach (Employee e in EmpList)
+            {
+
+            }
+
+            #endregion
+
             SetDaysOfWeek();
 
         }
