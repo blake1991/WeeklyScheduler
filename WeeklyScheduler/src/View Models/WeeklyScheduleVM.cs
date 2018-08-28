@@ -24,28 +24,14 @@ namespace WeeklyScheduler
 
         public WeeklyScheduleVM()
         {
-            EmpList = EmployeeTableDB.GetAllEmployees();
+           // EmpList = EmployeeTableDB.GetAllEmployees();
             testEmp = new ObservableCollection<EmployeeSchedule>();
             WeekDates = new ObservableCollection<myDatetime>();
 
 
             #region dummy data
 
-
-            foreach (var employee in EmpList)
-            {
-                EmployeeSchedule WeeklySchedule = new EmployeeSchedule();
-                WeeklySchedule.employee = employee;
-
-                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
-                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "8", EndTime = "3" });
-                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
-                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "11", EndTime = "7" });
-                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
-                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
-                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
-                testEmp.Add(WeeklySchedule);
-            }
+            Refresh();
 
             #endregion
 

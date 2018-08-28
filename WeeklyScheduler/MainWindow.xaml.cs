@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 using WeeklyScheduler.src.Data_Access;
 using WeeklyScheduler.src.Models;
 using WeeklyScheduler.Dialog;
-
+using System.Windows.Controls.Primitives;
 
 namespace WeeklyScheduler
 {
@@ -131,6 +131,52 @@ namespace WeeklyScheduler
         private void MoveToCurrentWeek_click(object sender, RoutedEventArgs e)
         {
             vm.MoveToCurrentWeek();
+        }
+
+        private void test_editending(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            Console.WriteLine("edit ending");
+            Console.WriteLine(sender.GetType());
+            var noclue = sender as DataGrid;
+            Console.WriteLine(noclue.ActualHeight);
+
+        }
+
+        /// <summary>
+        /// Find the row and column index of a clicked cell in a datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+
+            while (dep != null && !(dep is DataGridCell))
+            {
+                dep = VisualTreeHelper.GetParent(dep);
+                Console.WriteLine(dep);
+            }
+
+            if (dep == null)
+                return;
+
+            if (dep is DataGridCell)
+            {
+                DataGridCell cell = dep as DataGridCell;
+
+                // navigate further up the tree
+                while ((dep != null) && !(dep is DataGridRow))
+                {
+                    dep = VisualTreeHelper.GetParent(dep);
+                }
+
+                DataGridRow row = dep as DataGridRow;
+
+                //TODO: these are the row/column indices
+                //use these to update the collection with a new time range provided through a dialog box
+                Console.WriteLine("Row: {0} Column: {1}", row.GetIndex(), cell.Column.DisplayIndex);
+                
+            }
         }
     }
 }
