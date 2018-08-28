@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WeeklyScheduler.src.Data_Access;
 using WeeklyScheduler.src.Models;
-using WeeklyScheduler.src;
+using WeeklyScheduler.Dialog;
 
 
 namespace WeeklyScheduler
@@ -34,7 +34,7 @@ namespace WeeklyScheduler
             SchedulerDBContext.CreateDatabase();
 
             vm = new WeeklyScheduleVM();
-            
+
             base.DataContext = vm;
 
         }
@@ -103,16 +103,19 @@ namespace WeeklyScheduler
 
         private void AddNewEmployee(object sender, RoutedEventArgs e)
         {
-            //TODO: open dialog to add new employee
+            NameInputDialog input = new NameInputDialog();
+            NameInputVM nameVM = new NameInputVM();
+            input.DataContext = nameVM;
 
+            // open dialog box to prompt for new employee input
+            if (input.ShowDialog() == true)
+            {
+                Employee emp = new Employee();
+                emp.Name = nameVM.Name;
+                EmployeeTableDB.AddEmployee(emp);
+            }
 
-
-            //simulates dialog to add new employee
-            Employee emp = new Employee();
-            emp.Name = "different";
-
-            EmployeeTableDB.AddEmployee(emp);
-            vm.Refresh();   
+            vm.Refresh();
         }
 
         private void MoveForwardOneWeek_click(object sender, RoutedEventArgs e)

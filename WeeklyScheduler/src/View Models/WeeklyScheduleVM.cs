@@ -31,43 +31,20 @@ namespace WeeklyScheduler
 
             #region dummy data
 
-            //make new weekly schedule
-            EmployeeSchedule WeeklySchedule = new EmployeeSchedule();
-            WeeklySchedule.employee = EmpList.First();
 
-            //get schedule from db
-
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "8", EndTime = "3" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "11", EndTime = "7" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
-
-            testEmp.Add(WeeklySchedule);
-
-            //second employee
-            WeeklySchedule = new EmployeeSchedule();
-            WeeklySchedule.employee = EmpList.ElementAt(1);
-
-            //get schedule from db
-
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "7", EndTime = "3" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "7", EndTime = "3" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "6", EndTime = "4" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "5", EndTime = "9" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
-            WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
-
-            testEmp.Add(WeeklySchedule);
-
-
-            //dummy test data
-            foreach (Employee e in EmpList)
+            foreach (var employee in EmpList)
             {
+                EmployeeSchedule WeeklySchedule = new EmployeeSchedule();
+                WeeklySchedule.employee = employee;
 
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "8", EndTime = "3" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "11", EndTime = "7" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+                testEmp.Add(WeeklySchedule);
             }
 
             #endregion
@@ -79,6 +56,22 @@ namespace WeeklyScheduler
         public void Refresh()
         {
             EmpList = EmployeeTableDB.GetAllEmployees();
+
+            //dummy foreach to test add employee input box
+            foreach (var employee in EmpList)
+            {
+                EmployeeSchedule WeeklySchedule = new EmployeeSchedule();
+                WeeklySchedule.employee = employee;
+
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "8", EndTime = "3" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "11", EndTime = "7" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "off", EndTime = "off" });
+                WeeklySchedule.days.Add(new Schedule() { Day = 2, Month = 3, Year = 2018, StartTime = "9", EndTime = "5" });
+                testEmp.Add(WeeklySchedule);
+            }
         }
 
         private void SetDaysOfWeek()

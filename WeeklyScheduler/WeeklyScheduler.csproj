@@ -77,6 +77,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BindingProxy.cs" />
+    <Compile Include="Dialog\NameInputDialog.xaml.cs">
+      <DependentUpon>NameInputDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="myDatetime.cs" />
     <Compile Include="src\Data_Access\EmployeeTableDB.cs" />
     <Compile Include="src\Data_Access\SchedulerDBContext.cs" />
@@ -85,7 +88,12 @@
     <Compile Include="src\Models\EmployeeSchedule.cs" />
     <Compile Include="src\Models\Schedule.cs" />
     <Compile Include="src\View Models\BaseViewModel.cs" />
+    <Compile Include="src\View Models\NameInputVM.cs" />
     <Compile Include="src\View Models\WeeklyScheduleVM.cs" />
+    <Page Include="Dialog\NameInputDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
