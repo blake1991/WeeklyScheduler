@@ -6,17 +6,24 @@
         xmlns:local="clr-namespace:WeeklyScheduler.Dialog"
         mc:Ignorable="d"
         Title="Input" Height="300" Width="300" 
-        WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
         ResizeMode="NoResize" ContentRendered="NameInputDialog_ContentRendered">
 
     <Border Padding="20">
         <StackPanel>
             <TextBlock Text="{Binding DialogText}"/>
             <TextBox x:Name="NameInput" Text="{Binding Name, Mode=TwoWay}" MinWidth="200"></TextBox>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="Submit" Content="Submit" Margin="0 5 25 0" MinWidth="50"  MaxWidth="75" DockPanel.Dock="Left" Click="SubmitButton_Click" IsDefault="True"/>
-                <Button x:Name="Cancel" Content="Cancel" Margin="0 5 0 0" MinWidth="50"  MaxWidth="75" DockPanel.Dock="Right" IsCancel="True"/>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                
+                <Button Grid.Column="1" x:Name="Submit" Content="Submit" Margin="5" Click="SubmitButton_Click" IsDefault="True"/>
+                <Button Grid.Column="2" x:Name="Cancel" Content="Cancel" Margin="5" IsCancel="True"/>
+            </Grid>
         </StackPanel>
     </Border>
 </Window>
