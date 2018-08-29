@@ -24,16 +24,11 @@ namespace WeeklyScheduler
 
         public WeeklyScheduleVM()
         {
-           // EmpList = EmployeeTableDB.GetAllEmployees();
+            // EmpList = EmployeeTableDB.GetAllEmployees();
             testEmp = new ObservableCollection<EmployeeSchedule>();
             WeekDates = new ObservableCollection<myDatetime>();
 
-
-            #region dummy data
-
             Refresh();
-
-            #endregion
 
             SetDaysOfWeek();
 
@@ -62,11 +57,14 @@ namespace WeeklyScheduler
 
         private void SetDaysOfWeek()
         {
+            //get today
             DateTime today = DateTime.Now;
 
-            //go back to sunday
+            //go back to previous sunday
             TimeSpan fullday = new TimeSpan((int)today.DayOfWeek, 0, 0, 0);
             today = today.Subtract(fullday);
+
+            //add sunday date to list
             WeekDates.Add(new myDatetime(today));
 
             //start at sunday and create monday through saturday
@@ -83,6 +81,8 @@ namespace WeeklyScheduler
             WeekDates = new ObservableCollection<myDatetime>();
             //rebuild current week list
             SetDaysOfWeek();
+
+            //TODO: get new date range from database
         }
 
         public void MoveFowardOneWeek()
@@ -94,6 +94,7 @@ namespace WeeklyScheduler
                 newWeekDates.Add(date);
             }
             WeekDates = newWeekDates;
+            //TODO: get new date range from database
         }
 
         public void MoveBackOneWeek()
@@ -105,6 +106,7 @@ namespace WeeklyScheduler
                 newWeekDates.Add(date);
             }
             WeekDates = newWeekDates;
+            //TODO: get new date range from database
         }
 
     }

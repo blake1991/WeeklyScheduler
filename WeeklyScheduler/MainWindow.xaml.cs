@@ -133,14 +133,6 @@ namespace WeeklyScheduler
             vm.MoveToCurrentWeek();
         }
 
-        private void test_editending(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            Console.WriteLine("edit ending");
-            Console.WriteLine(sender.GetType());
-            var noclue = sender as DataGrid;
-            Console.WriteLine(noclue.ActualHeight);
-
-        }
 
         /// <summary>
         /// Find the row and column index of a clicked cell in a datagrid
@@ -164,7 +156,7 @@ namespace WeeklyScheduler
             {
                 DataGridCell cell = dep as DataGridCell;
 
-                // navigate further up the tree
+                // navigate further up the tree to get the row
                 while ((dep != null) && !(dep is DataGridRow))
                 {
                     dep = VisualTreeHelper.GetParent(dep);
@@ -175,7 +167,8 @@ namespace WeeklyScheduler
                 //TODO: these are the row/column indices
                 //use these to update the collection with a new time range provided through a dialog box
                 Console.WriteLine("Row: {0} Column: {1}", row.GetIndex(), cell.Column.DisplayIndex);
-                
+                DayScheduleDialog dsd = new DayScheduleDialog();
+                dsd.ShowDialog();
             }
         }
     }
