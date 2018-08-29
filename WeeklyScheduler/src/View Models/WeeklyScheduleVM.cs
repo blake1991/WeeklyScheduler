@@ -13,6 +13,7 @@ namespace WeeklyScheduler
 
         public string SampleText { get; set; }
 
+        //temporary name
         public ObservableCollection<EmployeeSchedule> testEmp { get; set; }
 
         /// <summary>
@@ -107,6 +108,21 @@ namespace WeeklyScheduler
             }
             WeekDates = newWeekDates;
             //TODO: get new date range from database
+        }
+
+        public void AddDaySchedule(DayScheduleVM vm)
+        {
+          //  Console.WriteLine("{0}, {1} to {2} on day {3}", EmpList.ElementAt(vm.EmployeeIndex).Name, vm.StartTime, vm.EndTime, WeekDates.ElementAt(vm.DayIndex - 1));
+
+            var currentDay = WeekDates.ElementAt(vm.DayIndex - 1).day;
+            var currentEmployee = EmpList.ElementAt(vm.EmployeeIndex);
+
+            Schedule schdl = new Schedule(currentDay.Month, currentDay.Day, currentDay.Year, vm.StartTime, vm.EndTime);
+            var scheduleId = ScheduleTableDB.AddSchedule(schdl);
+
+            EmployeeScheduleTableDB.AddEmployeeSchedule(currentEmployee.EmployeeId, scheduleId);
+
+            var dbdump = EmployeeScheduleTableDB.GetAllEmployeeSchedules();
         }
 
     }

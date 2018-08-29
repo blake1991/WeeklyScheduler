@@ -45,7 +45,7 @@
             </DataGrid.Resources>-->
             
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding employee.Name}" Width="*" Header="Staff"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding employee.Name}" Width="*" Header="Staff"></DataGridTextColumn>
 
                 <!--How to bind using relative source to mainwindow-->
                 

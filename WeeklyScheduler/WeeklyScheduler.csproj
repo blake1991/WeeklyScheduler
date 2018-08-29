@@ -84,6 +84,7 @@
       <DependentUpon>NameInputDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="myDatetime.cs" />
+    <Compile Include="src\Data_Access\EmployeeScheduleTableDB.cs" />
     <Compile Include="src\Data_Access\EmployeeTableDB.cs" />
     <Compile Include="src\Data_Access\SchedulerDBContext.cs" />
     <Compile Include="src\Data_Access\ScheduleTableDB.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="src\Models\EmployeeSchedule.cs" />
     <Compile Include="src\Models\Schedule.cs" />
     <Compile Include="src\View Models\BaseViewModel.cs" />
+    <Compile Include="src\View Models\DayScheduleVM.cs" />
     <Compile Include="src\View Models\NameInputVM.cs" />
     <Compile Include="src\View Models\WeeklyScheduleVM.cs" />
     <Page Include="Dialog\DayScheduleDialog.xaml">

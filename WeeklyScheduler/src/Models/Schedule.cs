@@ -14,5 +14,19 @@
         {
             return StartTime + " to " + EndTime;
         }
+
+        public Schedule()
+        {
+
+        }
+
+        public Schedule(int Month, int Day, int Year, string StarTime, string EndTime)
+        {
+            this.Month = Month;
+            this.Day = Day;
+            this.Year = Year;
+            this.StartTime = StartTime;
+            this.EndTime = EndTime;
+        }
     }
 }

@@ -23,5 +23,15 @@ namespace WeeklyScheduler.Dialog
         {
             InitializeComponent();
         }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void DayScheduleDialog_ContentRendered(object sender, EventArgs e)
+        {
+            StartTime.Focus();
+        }
     }
 }

@@ -167,8 +167,28 @@ namespace WeeklyScheduler
                 //TODO: these are the row/column indices
                 //use these to update the collection with a new time range provided through a dialog box
                 Console.WriteLine("Row: {0} Column: {1}", row.GetIndex(), cell.Column.DisplayIndex);
-                DayScheduleDialog dsd = new DayScheduleDialog();
-                dsd.ShowDialog();
+
+                //check if clicked cell was staff
+                if (!(cell.Column.DisplayIndex == 0))
+                {
+                    //after row and column is found load up dialog to input new start and end times
+                    DayScheduleDialog dsd = new DayScheduleDialog();
+                    DayScheduleVM dsvm = new DayScheduleVM();
+
+                    //populate vm with currently selected cell
+                    dsvm.EmployeeIndex = row.GetIndex();
+                    dsvm.DayIndex = cell.Column.DisplayIndex;
+
+
+                    dsd.DataContext = dsvm;
+                    if (dsd.ShowDialog() == true)
+                    {
+                        Console.WriteLine("{0} to {1}", dsvm.StartTime, dsvm.EndTime);
+
+                        //add new schedule to database
+                        vm.AddDaySchedule(dsvm);
+                    }
+                }
             }
         }
     }
