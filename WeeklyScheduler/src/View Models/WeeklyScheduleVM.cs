@@ -104,16 +104,16 @@ namespace WeeklyScheduler
         public void GetEmployeeSchedules()
         {
             var schdl_list = EmployeeScheduleTableDB.GetAllEmployeeSchedules();
+            var emp_list = EmployeeTableDB.GetAllEmployees();
             dictionary = new Dictionary<int, EmployeeSchedule>();
 
-            //add all employees to dictionary
-            foreach (var schdl in schdl_list)
+            ////add all employees to dictionary
+            foreach (var employee in emp_list)
             {
-                Employee emp = EmployeeTableDB.GetEmployee(schdl.Item1);
-
-                if (!dictionary.ContainsKey(emp.EmployeeId))
-                    dictionary.Add(emp.EmployeeId, new EmployeeSchedule(emp));
+                if (!dictionary.ContainsKey(employee.EmployeeId))
+                    dictionary.Add(employee.EmployeeId, new EmployeeSchedule(employee));
             }
+
 
             //add all employee schedules to dictionary
             foreach (var schdl in schdl_list)
@@ -124,16 +124,16 @@ namespace WeeklyScheduler
                 {
 
                     //place schedule in correct day slot
-                    for(int i = 0; i < WeekDates.Count; i++)
+                    for (int i = 0; i < WeekDates.Count; i++)
                     {
-                        if(WeekDates[i].Day == schedule.Day && WeekDates[i].Month == schedule.Month && WeekDates[i].Year == schedule.Year)
+                        if (WeekDates[i].Day == schedule.Day && WeekDates[i].Month == schedule.Month && WeekDates[i].Year == schedule.Year)
                         {
                             dictionary[schdl.Item1].days.RemoveAt(i);
                             dictionary[schdl.Item1].days.Insert(i, schedule);
                         }
                         else
                         {
-                           // dictionary[schdl.Item1].days.Add(new Schedule());
+                            // dictionary[schdl.Item1].days.Add(new Schedule());
                         }
                     }
 
