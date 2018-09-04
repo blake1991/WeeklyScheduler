@@ -28,7 +28,7 @@
             EndTime = string.Empty;
         }
 
-        public Schedule(int Month, int Day, int Year, string StarTime, string EndTime)
+        public Schedule(int Month, int Day, int Year, string StartTime, string EndTime)
         {
             this.Month = Month;
             this.Day = Day;

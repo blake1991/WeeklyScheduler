@@ -114,8 +114,6 @@ namespace WeeklyScheduler
                 emp.Name = nameVM.Name;
                 EmployeeTableDB.AddEmployee(emp);
             }
-
-            vm.Refresh();
         }
 
         private void MoveForwardOneWeek_click(object sender, RoutedEventArgs e)

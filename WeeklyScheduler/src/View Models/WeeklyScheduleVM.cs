@@ -9,34 +9,32 @@ namespace WeeklyScheduler
 {
     public class WeeklyScheduleVM : BaseViewModel
     {
-        public ObservableCollection<Employee> EmployeeList { get; set; }
+        /// <summary>
+        /// List of Employees and their daily schedules for the week.
+        /// </summary>
         public ObservableCollection<EmployeeSchedule> EmployeeSchedules { get; set; }
 
         /// <summary>
         /// Collection of weekly dates starting at sunday ending at saturday. Used to re-label data grid headers.
         /// </summary>
-        //public ObservableCollection<myDatetime> WeekDates { get; set; }
         public ObservableCollection<DateTime> WeekDates { get; set; }
 
+        /// <summary>
+        /// The date of that current weeks Sunday.
+        /// </summary>
         public DateTime WeekOfDate { get; set; }
 
-        public Schedule testGet { get; set; }
 
         public WeeklyScheduleVM()
         {
-            // EmpList = EmployeeTableDB.GetAllEmployees();
             EmployeeSchedules = new ObservableCollection<EmployeeSchedule>();
             WeekDates = new ObservableCollection<DateTime>();
 
-            Refresh();
+
+            CreateDummyData();
 
             GetWeekRange(DateTime.Now);
 
-        }
-
-        public void Refresh()
-        {
-            EmployeeList = EmployeeTableDB.GetAllEmployees();
         }
 
         /// <summary>
@@ -99,6 +97,24 @@ namespace WeeklyScheduler
             //var scheduleId = ScheduleTableDB.AddSchedule(schdl);
 
             //EmployeeScheduleTableDB.AddEmployeeSchedule(currentEmployee.EmployeeId, scheduleId);
+        }
+
+
+
+        public void CreateDummyData()
+        {
+            Random rand = new Random();
+            foreach (var employee in EmployeeTableDB.GetAllEmployees())
+            {
+                EmployeeSchedule schdl = new EmployeeSchedule(employee);
+                for (int i = 0; i < 7; i++)
+                {
+                    Schedule sun = new Schedule(1, 1, 1, rand.Next(12).ToString(), rand.Next(12).ToString());
+                    schdl.days.Add(sun);
+
+                }
+                EmployeeSchedules.Add(schdl);
+            }
         }
 
     }

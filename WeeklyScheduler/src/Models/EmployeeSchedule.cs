@@ -12,9 +12,9 @@ namespace WeeklyScheduler.src.Models
         public Employee employee { get; set; }
         public ObservableCollection<Schedule> days { get; set; }
 
-        public EmployeeSchedule()
+        public EmployeeSchedule(Employee emp)
         {
-            employee = new Employee();
+            employee = emp;
             days = new ObservableCollection<Schedule>();
         }
     }
