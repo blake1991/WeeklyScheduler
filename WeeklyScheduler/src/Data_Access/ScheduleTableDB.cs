@@ -30,6 +30,7 @@ namespace WeeklyScheduler
                     schdl.ScheduleId = Convert.ToInt32(reader["ScheduleId"].ToString());
                     schdl.Month = Convert.ToInt32(reader["month"].ToString());
                     schdl.Day = Convert.ToInt32(reader["day"].ToString());
+                    schdl.Year = Convert.ToInt32(reader["year"].ToString());
                     schdl.StartTime = (reader["starttime"].ToString());
                     schdl.EndTime = (reader["endtime"].ToString());
                 }
