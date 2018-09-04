@@ -34,9 +34,6 @@ namespace WeeklyScheduler
             EmployeeSchedules = new ObservableCollection<EmployeeSchedule>();
             WeekDates = new ObservableCollection<DateTime>();
 
-
-            // CreateDummyData();
-
             GetWeekRange(DateTime.Now);
             GetEmployeeSchedules();
 
@@ -152,22 +149,5 @@ namespace WeeklyScheduler
                 EmployeeSchedules.Add(emp.Value);
             }
         }
-
-        public void CreateDummyData()
-        {
-            Random rand = new Random();
-            foreach (var employee in EmployeeTableDB.GetAllEmployees())
-            {
-                EmployeeSchedule schdl = new EmployeeSchedule(employee);
-                for (int i = 0; i < 7; i++)
-                {
-                    Schedule sun = new Schedule(1, 1, 1, rand.Next(12).ToString(), rand.Next(12).ToString());
-                    schdl.days.Add(sun);
-
-                }
-                EmployeeSchedules.Add(schdl);
-            }
-        }
-
     }
 }
