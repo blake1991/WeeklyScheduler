@@ -136,13 +136,7 @@ namespace WeeklyScheduler
                             dictionary[schdl.Item1].days.RemoveAt(i);
                             dictionary[schdl.Item1].days.Insert(i, schedule);
                         }
-                        else
-                        {
-                            // dictionary[schdl.Item1].days.Add(new Schedule());
-                        }
                     }
-
-
                 }
             }
 
