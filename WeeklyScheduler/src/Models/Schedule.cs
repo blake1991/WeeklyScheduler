@@ -15,7 +15,15 @@
 
         public override string ToString()
         {
-            return StartTime + " to " + EndTime;
+            StartTime = StartTime.ToLower();
+            EndTime = EndTime.ToLower();
+
+            if (StartTime.Equals("off") || EndTime.Equals("off"))
+                return "off";
+            else if (!(StartTime == string.Empty) || !(EndTime == string.Empty))
+                return StartTime + " to " + EndTime;
+            else
+                return "";
         }
 
         public Schedule()
