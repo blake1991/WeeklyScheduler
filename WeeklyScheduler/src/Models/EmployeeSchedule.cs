@@ -16,6 +16,11 @@ namespace WeeklyScheduler.src.Models
         {
             employee = emp;
             days = new ObservableCollection<Schedule>();
+
+            for(int i = 0; i < 7; i++)
+            {
+                days.Add(new Schedule());
+            }
         }
     }
 }

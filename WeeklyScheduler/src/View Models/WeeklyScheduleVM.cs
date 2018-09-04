@@ -35,7 +35,7 @@ namespace WeeklyScheduler
             WeekDates = new ObservableCollection<DateTime>();
 
 
-            CreateDummyData();
+            // CreateDummyData();
 
             GetWeekRange(DateTime.Now);
             GetEmployeeSchedules();
@@ -71,24 +71,21 @@ namespace WeeklyScheduler
         public void MoveToCurrentWeek()
         {
             GetWeekRange(DateTime.Now);
-
-            //TODO: get new date range from database
+            GetEmployeeSchedules();
         }
 
         public void MoveFowardOneWeek()
         {
             var CurrentSunday = WeekDates[0];
             GetWeekRange(CurrentSunday.AddDays(7));
-
-            //TODO: get new date range from database
-
+            GetEmployeeSchedules();
         }
 
         public void MoveBackOneWeek()
         {
             var CurrentSunday = WeekDates[0];
             GetWeekRange(CurrentSunday.AddDays(-7));
-            //TODO: get new date range from database
+            GetEmployeeSchedules();
         }
 
         public void AddDaySchedule(DayScheduleVM vm)
@@ -128,11 +125,32 @@ namespace WeeklyScheduler
 
                 if (dictionary.ContainsKey(schdl.Item1))
                 {
-                    dictionary[schdl.Item1].days.Add(schedule);
+
+                    //place schedule in correct day slot
+                    for(int i = 0; i < WeekDates.Count; i++)
+                    {
+                        if(WeekDates[i].Day == schedule.Day && WeekDates[i].Month == schedule.Month && WeekDates[i].Year == schedule.Year)
+                        {
+                            dictionary[schdl.Item1].days.RemoveAt(i);
+                            dictionary[schdl.Item1].days.Insert(i, schedule);
+                        }
+                        else
+                        {
+                           // dictionary[schdl.Item1].days.Add(new Schedule());
+                        }
+                    }
+
+
                 }
             }
 
+            //empty out current schedules
+            EmployeeSchedules.Clear();
 
+            foreach (var emp in dictionary)
+            {
+                EmployeeSchedules.Add(emp.Value);
+            }
         }
 
         public void CreateDummyData()
