@@ -90,13 +90,16 @@ namespace WeeklyScheduler
         {
             //  Console.WriteLine("{0}, {1} to {2} on day {3}", EmpList.ElementAt(vm.EmployeeIndex).Name, vm.StartTime, vm.EndTime, WeekDates.ElementAt(vm.DayIndex - 1));
 
-            // var currentDay = WeekDates.ElementAt(vm.DayIndex - 1).day;
-            //var currentEmployee = EmployeeList.ElementAt(vm.EmployeeIndex);
+            var currentDay = WeekDates.ElementAt(vm.DayIndex - 1);
+            var currentEmployee = EmployeeSchedules.ElementAt(vm.EmployeeIndex).employee;
 
-            //Schedule schdl = new Schedule(currentDay.Month, currentDay.Day, currentDay.Year, vm.StartTime, vm.EndTime);
-            //var scheduleId = ScheduleTableDB.AddSchedule(schdl);
+            Schedule schdl = new Schedule(currentDay.Month, currentDay.Day, currentDay.Year, vm.StartTime, vm.EndTime);
 
-            //EmployeeScheduleTableDB.AddEmployeeSchedule(currentEmployee.EmployeeId, scheduleId);
+            //get new schedule id from database
+            var scheduleId = ScheduleTableDB.AddSchedule(schdl);
+
+            //add employee id and schedule id to linking table
+            EmployeeScheduleTableDB.AddEmployeeSchedule(currentEmployee.EmployeeId, scheduleId);
         }
 
 
