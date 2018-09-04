@@ -1,13 +1,16 @@
 ﻿namespace WeeklyScheduler
 {
+    /// <summary>
+    /// A work schedule for a single day. 
+    /// </summary>
     public class Schedule
     {
-        public int ScheduleId { get; set; } = -1;
-        public int Month { get; set; } = 0;
-        public int Day { get; set; } = 0;
-        public int Year { get; set; } = 0;
-        public string StartTime { get; set; } = string.Empty;
-        public string EndTime { get; set; } = string.Empty;
+        public int ScheduleId { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
+        public int Year { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
 
 
         public override string ToString()
@@ -17,7 +20,12 @@
 
         public Schedule()
         {
-
+            ScheduleId = -1;
+            Month = 0;
+            Day = 0;
+            Year = 0;
+            StartTime = string.Empty;
+            EndTime = string.Empty;
         }
 
         public Schedule(int Month, int Day, int Year, string StarTime, string EndTime)

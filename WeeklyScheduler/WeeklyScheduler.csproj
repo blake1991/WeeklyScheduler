@@ -76,14 +76,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BindingProxy.cs" />
     <Compile Include="Dialog\DayScheduleDialog.xaml.cs">
       <DependentUpon>DayScheduleDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\NameInputDialog.xaml.cs">
       <DependentUpon>NameInputDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="myDatetime.cs" />
     <Compile Include="src\Data_Access\EmployeeScheduleTableDB.cs" />
     <Compile Include="src\Data_Access\EmployeeTableDB.cs" />
     <Compile Include="src\Data_Access\SchedulerDBContext.cs" />
