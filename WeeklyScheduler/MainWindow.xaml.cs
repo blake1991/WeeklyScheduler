@@ -113,6 +113,7 @@ namespace WeeklyScheduler
                 Employee emp = new Employee();
                 emp.Name = nameVM.Name;
                 EmployeeTableDB.AddEmployee(emp);
+                vm.RefreshDataGrid();
             }
         }
 
@@ -185,6 +186,8 @@ namespace WeeklyScheduler
 
                         //add new schedule to database
                         vm.AddDaySchedule(dsvm);
+
+                        vm.RefreshDataGrid();
                     }
                 }
             }

@@ -39,6 +39,11 @@ namespace WeeklyScheduler
 
         }
 
+        public void RefreshDataGrid()
+        {
+            GetEmployeeSchedules();
+        }
+
         /// <summary>
         /// Gets the week range containing provided date.
         /// </summary>
