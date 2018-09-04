@@ -10,6 +10,10 @@ namespace WeeklyScheduler
     class EmployeeScheduleTableDB
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A list of Tuple(EmployeeId, ScheduleId)</returns>
         public static List<Tuple<int, int>> GetAllEmployeeSchedules()
         {
             List<Tuple<int, int>> tList = new List<Tuple<int, int>>();

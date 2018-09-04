@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.ComponentModel;
 using WeeklyScheduler.src.Data_Access;
 using WeeklyScheduler.src.Models;
@@ -25,6 +26,9 @@ namespace WeeklyScheduler
         public DateTime WeekOfDate { get; set; }
 
 
+        private Dictionary<int, EmployeeSchedule> dictionary;
+
+
         public WeeklyScheduleVM()
         {
             EmployeeSchedules = new ObservableCollection<EmployeeSchedule>();
@@ -34,6 +38,7 @@ namespace WeeklyScheduler
             CreateDummyData();
 
             GetWeekRange(DateTime.Now);
+            GetEmployeeSchedules();
 
         }
 
@@ -102,7 +107,33 @@ namespace WeeklyScheduler
             EmployeeScheduleTableDB.AddEmployeeSchedule(currentEmployee.EmployeeId, scheduleId);
         }
 
+        public void GetEmployeeSchedules()
+        {
+            var schdl_list = EmployeeScheduleTableDB.GetAllEmployeeSchedules();
+            dictionary = new Dictionary<int, EmployeeSchedule>();
 
+            //add all employees to dictionary
+            foreach (var schdl in schdl_list)
+            {
+                Employee emp = EmployeeTableDB.GetEmployee(schdl.Item1);
+
+                if (!dictionary.ContainsKey(emp.EmployeeId))
+                    dictionary.Add(emp.EmployeeId, new EmployeeSchedule(emp));
+            }
+
+            //add all employee schedules to dictionary
+            foreach (var schdl in schdl_list)
+            {
+                Schedule schedule = ScheduleTableDB.GetScheduleById(schdl.Item2);
+
+                if (dictionary.ContainsKey(schdl.Item1))
+                {
+                    dictionary[schdl.Item1].days.Add(schedule);
+                }
+            }
+
+
+        }
 
         public void CreateDummyData()
         {
